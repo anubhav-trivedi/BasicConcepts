@@ -15,6 +15,7 @@ namespace CsharpConcepts
             switch (path)
             {
                 case "A":
+                case "a":
                 {
                     Console.Write("Enter radius : ");
                     var rad = Console.ReadLine();
@@ -23,6 +24,7 @@ namespace CsharpConcepts
                     break;
 
                 case "B":
+                case "b":
                 {
                     Console.WriteLine("Please enter your first name");
                     string a = Console.ReadLine();
@@ -41,8 +43,30 @@ namespace CsharpConcepts
                 }
                     break;
                 case "C":
+                case "c":
                 {
+                    Employee[] employees = new Employee[4];
+                    employees[0] = new Employee();
+                    employees[1] = new FullTimeEmployee();
+                    employees[2] = new PartTimeEmployee();
+                    employees[3] = new TemporaryEmployee();
 
+                    foreach (Employee emp in employees)
+                    {
+                        /*
+                         * Using virtual in baseclass we can override the function in derived class.
+                         * This is called as Method Overriding or Runtime Polymorphism.
+                         * We can also overload method by changing their signatures. 
+                         * It is called Method Overloading or Static Polymorphism.
+                         */
+                        emp.PrintFullName();
+                    }
+                    float sum;
+                    Overload.Add(1, 2);
+                    Overload.Add(1, 2, 3);
+                    Overload.Add(1.2f, 2, 1);
+                    Overload.Add(2.4f, 8, out sum);
+                    Console.WriteLine("Out param : " + sum);
                 }
                     break;
                 default:
@@ -65,5 +89,6 @@ namespace CsharpConcepts
             var path = Console.ReadLine();
             return path;
         }
+
     }
 }
