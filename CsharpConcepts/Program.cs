@@ -10,7 +10,7 @@ namespace CsharpConcepts
             ProceedOnPath(path);
         }
 
-        private static void ProceedOnPath(string path)
+        private static void ProceedOnPath(string path) 
         {
             switch (path)
             {
@@ -66,7 +66,21 @@ namespace CsharpConcepts
                     Overload.Add(1, 2, 3);
                     Overload.Add(1.2f, 2, 1);
                     Overload.Add(2.4f, 8, out sum);
-                    Console.WriteLine("Out param : " + sum);
+                    Console.WriteLine("Out param : {0}", sum);
+                }
+                    break;
+                case "D":
+                case "d":
+                {
+                    int i = 0;
+                    float sum;
+                    PassByValue(i);  // This will create a copy of i in memory
+                    Console.WriteLine("Value of i when passed by Value is " + i);
+                    PassByReference(ref i); // This will not create a new copy of i
+                    Console.WriteLine("Value of i when passed by Reference is " + i);
+                    Overload.Add(2.4f, 8, out sum); // Out parameter is used to return one or more value from method
+                    Console.WriteLine("Output parameter is {0}", sum);
+                    ParamsMethod(1, 2, 3, 4, 5);
                 }
                     break;
                 default:
@@ -79,12 +93,37 @@ namespace CsharpConcepts
             }
         }
 
+        private static void PassByReference(ref int i)
+        {
+            i = 10;
+        }
+
+        private static void PassByValue(int i)
+        {
+            i = 10;
+        }
+
+        private static void ParamsMethod(params int[] nums)
+        {
+            /*
+             * Params array parameters are used to pass n number of elements comma separated
+             * Params array is also optional
+             * Params array must always be last argument you are passing
+             */
+            Console.WriteLine("I have passed {0} elements", nums.Length);
+            foreach (int n in nums)
+            {
+                Console.WriteLine(n);
+            }
+        }
+
         private static string SetChoice()
         {
             Console.WriteLine("Please select your path :-");
-            Console.WriteLine("***Static Class : Press A");
-            Console.WriteLine("***Inheritence  : Press B");
-            Console.WriteLine("***Polymorphism : Press C");
+            Console.WriteLine("***Press A : Static Class");
+            Console.WriteLine("***Press B : Inheritence");
+            Console.WriteLine("***Press C : Polymorphism");
+            Console.WriteLine("***Press D : Method Parameters");
 
             var path = Console.ReadLine();
             return path;
